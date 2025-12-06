@@ -1,0 +1,477 @@
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --primary: #3b82f6;
+    --accent: #8b5cf6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 20%);
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically initially */
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    /* Intro Animation: Title enters first */
+    animation: fadeInDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: all 0.8s ease;
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    /* New Font */
+    font-size: 5rem;
+    /* Hero Size */
+    font-weight: 900;
+    letter-spacing: 4px;
+    /* More spaced out for sci-fi look */
+    text-transform: uppercase;
+
+    /* Sharper: Solid White */
+    color: #ffffff;
+
+    /* Sharper Glow: Reduced blur, higher defined contrast */
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.9),
+        /* Crisp white edge */
+        0 0 15px rgba(139, 92, 246, 0.8),
+        /* Strong inner glow */
+        0 0 30px rgba(59, 130, 246, 0.6);
+    /* Soft outer halo */
+
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+
+    /* Pop Animation */
+    animation: popIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Subtitle */
+header p {
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+    /* Delay subtitle */
+}
+
+/* Logic: Filters appear AFTER title (Sequence) */
+.filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: end;
+    /* Redesign: Stand out more */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+    backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    /* Subtle blue border */
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Staggered Load */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.8s ease-out 1s forwards;
+    /* 1s delay */
+}
+
+/* Subtle accent line at the top */
+.filters::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    opacity: 0.7;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+label {
+    font-weight: 700;
+    color: var(--text-main);
+    /* Brighter labels */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input,
+select,
+button {
+    font-family: inherit;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #0f172a;
+    /* Darker input bg */
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+    background: #1e293b;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+}
+
+button {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    /* Reset Button */
+    height: 52px;
+    /* Match input height approx */
+
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+    filter: brightness(1.1);
+}
+
+.results-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    /* Initially Hidden */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+/* --- Results Active State (After Search) --- */
+.app-container.results-active {
+    justify-content: flex-start;
+    /* Move to top */
+    padding-top: 2rem;
+}
+
+.app-container.results-active header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.app-container.results-active header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    /* Shrink title */
+    margin-bottom: 0;
+    /* Keep Orbitron but smaller */
+    letter-spacing: 2px;
+}
+
+.app-container.results-active header p {
+    display: none;
+    /* Hide subtitle to save space */
+}
+
+/* Reveal results info when active */
+.app-container.results-active .results-info {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Initially Hide Grid */
+.games-grid {
+    display: none;
+    /* Hidden by default */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    animation: slideUp 0.8s ease-out;
+    opacity: 0;
+    /* Prepare for fade in */
+}
+
+.app-container.results-active .games-grid {
+    display: grid;
+    /* Reveal */
+    opacity: 1;
+}
+
+/* Aesthetic Revamp */
+.game-card {
+    background: #1e293b;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    border-color: rgba(59, 130, 246, 0.5);
+    /* Blue glow */
+}
+
+.card-image-container {
+    height: 160px;
+    background: #0f172a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-image {
+    width: 110px;
+    /* FIXED WIDTH again */
+    height: 110px;
+    /* FIXED HEIGHT again */
+    object-fit: contain;
+    /* Ensures logo isn't cut off */
+    transition: transform 0.3s;
+
+    /* "Apple Style" Icon - Restored */
+    border-radius: 28px;
+
+    /* Lift it slightly */
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+.game-card:hover .card-image {
+    transform: scale(1.1) rotate(3deg);
+    /* Fun micro-interaction */
+}
+
+.card-content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.3;
+}
+
+.card-tags {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.tag.category {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #f59e0b;
+    /* Amber/Gold */
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.card-sub-info {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.sub-price {
+    color: #10b981;
+    /* Emerald */
+}
+
+.sub-mood {
+    color: #d946ef;
+    /* Fuschia */
+}
+
+.dot {
+    opacity: 0.3;
+}
+
+.card-info-row {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 0.8rem;
+    color: #cbd5e1;
+}
+
+.card-players {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.card-platform {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .filters {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .filters {
+        grid-template-columns: 1fr;
+        /* 1 column on mobile */
+        padding: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 3.5rem;
+        /* Smaller hero on mobile */
+    }
+}

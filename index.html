@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Finder</title>
+    <!-- Cache Buster added -->
+    <link rel="stylesheet" href="style.css?v=8">
+    <!-- Load Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Game Finder</h1>
+            <p>Find the perfect game to play with your friends.</p>
+        </header>
+
+        <section class="filters">
+            <div class="filter-group">
+                <label for="playersInput">Players</label>
+                <input type="number" id="playersInput" placeholder="e.g. 4" min="1">
+            </div>
+
+            <div class="filter-group">
+                <label for="priceSelect">Price</label>
+                <select id="priceSelect">
+                    <option value="any">Any Price</option>
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="platformSelect">Platform</label>
+                <select id="platformSelect">
+                    <option value="any">Any Platform</option>
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="categorySelect">Category</label>
+                <select id="categorySelect">
+                    <option value="any">Any Category</option>
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+
+            <button id="findBtn">Find Games</button>
+
+            <div class="filter-group">
+                <label for="moodSelect">Mood</label>
+                <select id="moodSelect">
+                    <option value="any">Any Mood</option>
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+        </section>
+
+        <section class="results-info">
+            <span id="resultsCount">0 games found</span>
+        </section>
+
+        <div id="gamesGrid" class="games-grid">
+            <!-- Game cards injected here -->
+        </div>
+    </div>
+
+    <!-- Data Source -->
+    <script src="public/data/data.js?v=8"></script>
+    <!-- App Logic -->
+    <script src="script.js?v=8"></script>
+</body>
+
+</html>
