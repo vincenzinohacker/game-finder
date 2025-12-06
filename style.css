@@ -205,10 +205,7 @@ button:hover {
 
 .app-container.results-active header {
     margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
+    text-align: center;
     padding: 0 1rem;
 }
 
